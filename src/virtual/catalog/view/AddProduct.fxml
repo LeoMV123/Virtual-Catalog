@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="340.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/22">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virtual.catalog.controller.AddProductController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="340.0">
          <children>
@@ -21,29 +20,29 @@
                </font>
             </Label>
             <Label text="Name" />
-            <TextField promptText="Name">
+            <TextField fx:id="textFieldName" promptText="Name">
                <VBox.margin>
                   <Insets bottom="8.0" left="21.0" right="21.0" top="8.0" />
                </VBox.margin>
             </TextField>
             <Label text="Price" />
-            <TextField promptText="Price">
+            <TextField fx:id="textFieldPrice" promptText="Price">
                <VBox.margin>
                   <Insets bottom="8.0" left="21.0" right="21.0" top="8.0" />
                </VBox.margin>
             </TextField>
-            <ComboBox prefWidth="150.0" promptText="Select category" />
-            <TextArea prefHeight="200.0" prefWidth="200.0">
+            <ComboBox fx:id="comboBoxCategory" prefWidth="150.0" promptText="Select category" />
+            <TextArea fx:id="textAreaDescription" prefHeight="200.0" prefWidth="200.0">
                <VBox.margin>
                   <Insets bottom="8.0" left="21.0" right="21.0" top="8.0" />
                </VBox.margin>
             </TextArea>
-            <Button mnemonicParsing="false" text="Add image">
+            <Button fx:id="btnAddImage" mnemonicParsing="false" onMouseClicked="#ButtonAddImage" text="Add image">
                <VBox.margin>
                   <Insets bottom="8.0" top="8.0" />
                </VBox.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Add product">
+            <Button fx:id="btnAddProduct" mnemonicParsing="false" onMouseClicked="#ButtonAddProduct" text="Add product">
                <VBox.margin>
                   <Insets bottom="8.0" top="8.0" />
                </VBox.margin>

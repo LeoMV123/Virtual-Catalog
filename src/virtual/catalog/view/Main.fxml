@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virtual.catalog.controller.MainController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
@@ -17,12 +17,12 @@
                      <children>
                         <VBox alignment="CENTER" layoutX="-1.0" layoutY="-4.0" prefHeight="378.0" prefWidth="175.0" spacing="21.0">
                            <children>
-                              <Button mnemonicParsing="false" prefWidth="100.0" text="Add category">
+                              <Button fx:id="btnAddCategory" mnemonicParsing="false" onMouseClicked="#ButtonAddCategory" prefWidth="100.0" text="Add category">
                                  <padding>
                                     <Insets bottom="13.0" left="13.0" right="13.0" top="13.0" />
                                  </padding>
                               </Button>
-                              <Button alignment="CENTER" mnemonicParsing="false" prefWidth="100.0" text="Add product">
+                              <Button fx:id="btnAddProduct" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#ButtonAddProduct" prefWidth="100.0" text="Add product">
                                  <padding>
                                     <Insets bottom="13.0" left="13.0" right="13.0" top="13.0" />
                                  </padding>

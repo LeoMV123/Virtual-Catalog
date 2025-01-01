@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="virtual.catalog.controller.AddCategoryController">
    <children>
-      <VBox alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="377.0" prefWidth="340.0">
+      <VBox alignment="CENTER" layoutX="-1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="340.0">
          <children>
             <Label text="Category">
                <VBox.margin>
@@ -21,17 +21,17 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField promptText="Name">
+            <TextField fx:id="textFieldName" promptText="Name">
                <VBox.margin>
                   <Insets bottom="21.0" left="21.0" right="21.0" top="21.0" />
                </VBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" text="Add">
+            <Button fx:id="btnAddCategory" mnemonicParsing="false" onMouseClicked="#ButtonAddCategory" text="Add category">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
-            <ComboBox prefHeight="25.0" prefWidth="265.0" promptText="List of categories">
+            <ComboBox fx:id="comboBoxListOfCategories" prefHeight="25.0" prefWidth="265.0" promptText="List of categories">
                <VBox.margin>
                   <Insets bottom="21.0" left="21.0" right="21.0" top="21.0" />
                </VBox.margin>
