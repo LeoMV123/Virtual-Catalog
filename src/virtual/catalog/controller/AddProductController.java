@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package virtual.catalog.controller;
 
 import java.net.URL;
@@ -14,11 +10,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
-/**
- * FXML Controller class
- *
- * @author burto
- */
 public class AddProductController implements Initializable {
 
     @FXML
@@ -34,9 +25,6 @@ public class AddProductController implements Initializable {
     @FXML
     private Button btnAddProduct;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -48,6 +36,10 @@ public class AddProductController implements Initializable {
 
     @FXML
     private void ButtonAddProduct(MouseEvent event) {
+    }
+
+    void setMainController(MainController aThis) {
+        
     }
     
 }
