@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -19,7 +21,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
+import javafx.util.Pair;
 import virtual.catalog.dao.CategoryDAO;
 import virtual.catalog.model.Category;
 
@@ -67,20 +71,20 @@ public class AddCategoryController implements Initializable {
         if (!textFieldName.getText().isEmpty()) {
             String name = textFieldName.getText();
             
-            categoryDAO.addCategory(name);
+            categoryDAO.add(name);
             
             textFieldName.setText("");
+            
+            List<Category> categories = categoryDAO.getCategories();
+            
+            tableViewCategory.setItems(FXCollections.observableArrayList(categories));
+            addButtonToTable();
             
             Alert alert = new Alert(AlertType.INFORMATION);
             alert.setTitle("Information");
             alert.setHeaderText(null);
             alert.setContentText("Successfully added category");
             alert.showAndWait();
-            
-            List<Category> categories = categoryDAO.getCategories();
-            
-            tableViewCategory.setItems(FXCollections.observableArrayList(categories));
-            addButtonToTable();
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Warning");
@@ -99,23 +103,77 @@ public class AddCategoryController implements Initializable {
                 {
                     btnEdit.setOnMouseClicked((MouseEvent event) -> {
                         Category category = getTableView().getItems().get(getIndex());
-                        System.out.println("Edit clicked for: " + category.getName());
+                        
+                        Dialog<ButtonType> dialogEdit = new Dialog<>();
+                        
+                        dialogEdit.setTitle("Edit category");
+                        
+                        dialogEdit.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+                        
+                        Label label = new Label("Editing name of the category: " + category.getName());
+                        
+                        TextField textFieldNewName = new TextField();
+                        textFieldNewName.setPromptText("New name");
+                        
+                        VBox vBox = new VBox(label, textFieldNewName);
+                        dialogEdit.getDialogPane().setContent(vBox);
+                        
+                        Optional<ButtonType> result = dialogEdit.showAndWait();
+                        
+                        if (result.isPresent() && ButtonType.OK == result.get() && !textFieldNewName.getText().isEmpty()) {
+                            Alert alertConfirmation = new Alert(AlertType.CONFIRMATION);
+                            alertConfirmation.setTitle("Confirmation");
+                            alertConfirmation.setHeaderText(null);
+                            alertConfirmation.setContentText("Are you sure you want to edited this category: " +
+                                category.getName());
+                            
+                            Optional<ButtonType> confirmation = alertConfirmation.showAndWait();
+                            
+                            if (confirmation.isPresent() && confirmation.get() == ButtonType.OK) {
+                                CategoryDAO categoryDAO = new CategoryDAO();
+                                categoryDAO.update(category.getId(), textFieldNewName.getText());
+                                
+                                System.out.println("Action perfom");
+                                
+                                List<Category> categories = categoryDAO.getCategories();
+                                
+                                tableViewCategory.setItems(FXCollections.observableArrayList(categories));
+                                addButtonToTable();
+                                
+                                Alert alertInformation = new Alert(AlertType.INFORMATION);
+                                alertInformation.setTitle("Information");
+                                alertInformation.setHeaderText(null);
+                                alertInformation.setContentText("Successfully updated category");
+                                alertInformation.showAndWait();
+                                
+                                dialogEdit.close();
+                            } else {
+                                System.err.println("Action cancelled");
+                            }
+                        } else {
+                            Alert alert = new Alert(AlertType.WARNING);
+                            
+                            alert.setTitle("Warning");
+                            alert.setHeaderText(null);
+                            alert.setContentText("You have to write a name for update category");
+                            alert.showAndWait();
+                        }
                     });
                     
                     btnDelete.setOnMouseClicked((MouseEvent event) -> {
                         Category category = getTableView().getItems().get(getIndex());
                         
-                        Alert alert = new Alert(AlertType.CONFIRMATION);
-                        alert.setTitle("Confirmation");
-                        alert.setHeaderText(null);
-                        alert.setContentText("Are you sure you want to remove this category: " +
-                                category.getName());
+                        Alert alertConfirmation = new Alert(AlertType.CONFIRMATION);
+                        alertConfirmation.setTitle("Confirmation");
+                        alertConfirmation.setHeaderText(null);
+                        alertConfirmation.setContentText("Are you sure you want to remove this category: " +
+                            category.getName());
                         
-                        Optional<ButtonType> result = alert.showAndWait();
+                        Optional<ButtonType> result = alertConfirmation.showAndWait();
                         
                         if (result.isPresent() && result.get() == ButtonType.OK) {
                             CategoryDAO categoryDAO = new CategoryDAO();
-                            categoryDAO.deleteCategory(category.getId());
+                            categoryDAO.delete(category.getId());
                             
                             System.err.println("Action perform");
                             
@@ -123,6 +181,12 @@ public class AddCategoryController implements Initializable {
             
                             tableViewCategory.setItems(FXCollections.observableArrayList(categories));
                             addButtonToTable();
+                            
+                            Alert alertInformation = new Alert(AlertType.INFORMATION);
+                            alertInformation.setTitle("Information");
+                            alertInformation.setHeaderText(null);
+                            alertInformation.setContentText("Successfully removed category");
+                            alertInformation.showAndWait();
                         } else {
                             System.err.println("Action cancelled");
                         }

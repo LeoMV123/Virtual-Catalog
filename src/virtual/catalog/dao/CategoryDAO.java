@@ -21,7 +21,7 @@ public class CategoryDAO {
     
     private ConnectionMySQL connection = new ConnectionMySQL();
     
-    public void addCategory (String name) {
+    public void add (String name) {
         PreparedStatement ps = null;
         
         try {
@@ -36,15 +36,15 @@ public class CategoryDAO {
         }
     }
     
-    public boolean deleteCategory(int id) {
+    public boolean delete(int id) {
         boolean flag = true;
         PreparedStatement ps = null;
         
         try {
-            ps = connection.getConnection().prepareCall(DELETE);
+            ps = connection.getConnection().prepareStatement(DELETE);
             ps.setInt(1, id);
             
-            if ((ps.executeUpdate() == 0)) {
+            if (ps.executeUpdate() == 0) {
                 System.err.println("Error");
                 flag = false;
             }
@@ -53,6 +53,23 @@ public class CategoryDAO {
         }
         
         return flag;
+    }
+    
+    public void update(int id, String name) {
+        PreparedStatement ps = null;
+        
+        try {
+            ps = connection.getConnection().prepareStatement(UPDATE);
+            
+            ps.setString(1, name);
+            ps.setInt(2, id);
+            
+            if (ps.executeUpdate() == 0) {
+                System.out.println("Error");
+            }
+        } catch (SQLException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
     
     public List<Category> getCategories() {
