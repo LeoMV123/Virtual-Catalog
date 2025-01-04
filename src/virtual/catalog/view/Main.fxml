@@ -17,7 +17,7 @@
                      <children>
                         <VBox alignment="CENTER" layoutX="-1.0" layoutY="-4.0" prefHeight="378.0" prefWidth="175.0" spacing="21.0">
                            <children>
-                              <Button fx:id="btnAddCategory" mnemonicParsing="false" onMouseClicked="#ButtonAddCategory" prefWidth="100.0" text="Add category">
+                              <Button fx:id="btnCategory" mnemonicParsing="false" onMouseClicked="#ButtonAddCategory" prefWidth="100.0" text="Category">
                                  <padding>
                                     <Insets bottom="13.0" left="13.0" right="13.0" top="13.0" />
                                  </padding>
