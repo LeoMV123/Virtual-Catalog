@@ -58,7 +58,7 @@ public class AddCategoryController implements Initializable {
         this.columnID.setCellValueFactory(new PropertyValueFactory("id"));
         this.columnName.setCellValueFactory(new PropertyValueFactory("name"));
         
-        if (categories != null) {
+        if (!categories.isEmpty()) {
             tableViewCategory.setItems(FXCollections.observableArrayList(categories));
             addButtonToTable();
         }
@@ -71,7 +71,7 @@ public class AddCategoryController implements Initializable {
         if (!textFieldName.getText().isEmpty()) {
             String name = textFieldName.getText();
             
-            categoryDAO.add(name);
+            categoryDAO.insert(name);
             
             textFieldName.setText("");
             

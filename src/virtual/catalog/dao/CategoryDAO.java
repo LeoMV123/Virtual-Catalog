@@ -16,12 +16,9 @@ public class CategoryDAO {
     private final String GETONE = "SELECT * FROM category WHERE id = ?;";
     private final String GETALL = "SELECT * FROM category;";
     
-    // Query for ProductDAO
-    // private final String COUNT = "SELECT COUNT(*) product WHERE id_category = ?";
-    
     private ConnectionMySQL connection = new ConnectionMySQL();
     
-    public void add (String name) {
+    public void insert (String name) {
         PreparedStatement ps = null;
         
         try {

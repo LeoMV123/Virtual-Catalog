@@ -5,6 +5,8 @@
         <group>
             <file>file:/D:/Burton/OneDrive/Documents/NetBeansProjects/Virtual-Catalog/src/virtual/catalog/dao/CategoryDAO.java</file>
             <file>file:/D:/Burton/OneDrive/Documents/NetBeansProjects/Virtual-Catalog/src/virtual/catalog/App.java</file>
+            <file>file:/D:/Burton/OneDrive/Documents/NetBeansProjects/Virtual-Catalog/src/virtual/catalog/dao/ProductDAO.java</file>
+            <file>file:/D:/Burton/OneDrive/Documents/NetBeansProjects/Virtual-Catalog/src/virtual/catalog/model/Product.java</file>
             <file>file:/D:/Burton/OneDrive/Documents/NetBeansProjects/Virtual-Catalog/src/virtual/catalog/controller/AddCategoryController.java</file>
         </group>
     </open-files>

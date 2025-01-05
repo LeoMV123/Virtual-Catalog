@@ -2,15 +2,19 @@ package virtual.catalog.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import virtual.catalog.dao.CategoryDAO;
+import virtual.catalog.model.Category;
 
 public class MainController implements Initializable {
 
@@ -43,19 +47,32 @@ public class MainController implements Initializable {
 
     @FXML
     private void ButtonAddProduct(MouseEvent event) throws IOException {
-        // Parent root = FXMLLoader.load(getClass().getResource("../view/AddProduct.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AddProduct.fxml"));
-        Parent root = loader.load();
+        CategoryDAO categoryDAO = new CategoryDAO();
+        List<Category> categories = categoryDAO.getCategories();
         
-        AddProductController controller = loader.getController();
-        // controller.setMainController(this);
-        
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-        
-        stage.setTitle("Add product");
-        stage.setScene(scene);
-        stage.showAndWait();
+        if (categories.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText("You can't add a product because you\n" +
+                    "don't have any categories registred");
+            alert.showAndWait();    
+        } else {
+            // Parent root = FXMLLoader.load(getClass().getResource("../view/AddProduct.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AddProduct.fxml"));
+            Parent root = loader.load();
+
+            AddProductController controller = loader.getController();
+            // controller.setMainController(this);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setTitle("Add product");
+            stage.setScene(scene);
+            stage.showAndWait();
+        }
     }
     
 }

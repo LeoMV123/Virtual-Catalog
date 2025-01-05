@@ -24,8 +24,6 @@ public class Product {
         this.description = description;
         this.image = image;
     }
-    
-    
 
     public Product(String name, double price, int id_category, String description, String image) {
         this.name = name;
